@@ -285,6 +285,14 @@ border: 2px double black;
         margin: 0;
 
     }
+    .card{
+        height: 600px;
+        font-size: smaller;
+        width: 440px;
+    }
+    h3{
+        font-size: small;
+    }
     body{
         margin:0
     }
@@ -303,10 +311,16 @@ border: 2px double black;
         /* padding:5rem; */
         
     }
+    .buttons_side{
+        display: flex;
+        justify-content: space-between;
+    }
     #results{
      float: right;
      margin: 0;
      height: 19rem;
+     width: auto;
+     padding: 2rem;
     }
     .picture{
         width: auto;
