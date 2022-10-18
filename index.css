@@ -276,3 +276,14 @@ padding: 1rem;
 .selected {
 border: 2px double black;
 }
+
+@media (max-width: 480px) {
+    .main{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 50px;
+    }
+    #results{
+     float: right;
+    }
+}
