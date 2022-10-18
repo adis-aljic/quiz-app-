@@ -405,7 +405,7 @@ const start_game = () => {
                         <br>
                         Time: ${document.getElementById("timer").innerText}
                         <br>
-                        <p>  <br> ${listAns(answers_from_user, questions, data.length, question_times)} </p>
+                        <p class="score_listed">  <br> ${listAns(answers_from_user, questions, data.length, question_times)} </p>
                         `
 
 
