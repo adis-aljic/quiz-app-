@@ -24,7 +24,14 @@ const list_games = () => {
         document.getElementById("top").innerHTML = list
     })
 }
-
+function play_correct() {
+    var audio = new Audio('correct.mp3');
+    audio.play();
+  }
+function play_wrong() {
+    var audio = new Audio('wrong.mp3');
+    audio.play();
+  }
 
 const input = () => {
     let string = "https://the-trivia-api.com/api/questions?categories="
@@ -327,10 +334,10 @@ const start_game = () => {
                             if (!el.classList.contains("wrong") && el == element ) {
                                 
                                 console.log("correct");
-                                document.getElementById("c_w").innerHTML = `This is right answer`
+                                document.getElementById("c_w").innerHTML = `This is correct answer`
                                 element.classList.add("correct")
                                 answers_from_user.push(element.value)
-                                  
+                                  play_correct()
                                                             counter++
 
                                  
@@ -351,6 +358,7 @@ const start_game = () => {
                         console.log("wrong");
                         answers_from_user.push(element.value)
                         element.classList.add("wrong")
+                        play_wrong()
                         document.getElementById("c_w").innerHTML = `This is wrong answer`
                     }
                 }
