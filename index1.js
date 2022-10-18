@@ -1,0 +1,398 @@
+const rules = () => {
+    document.getElementById("rules").addEventListener("click", () =>
+        alert(`
+    For game to start first choose username, difficulty, categories and number of question.
+    You can  choose one difficulty, one more then one catogory and up to 20 questions per one game.
+    Your score is range as percent for correct answers.`)
+    )
+}
+
+const list_games = () => {
+    document.getElementById("list_games").addEventListener("click", () => {
+        let list = ""
+        for (let i = 0; i < localStorage.length; i++) {
+
+            let key = localStorage.key(i);
+
+            let value = localStorage.getItem(key);
+            let user = JSON.parse(value)
+            if (Number(user.percentege.slice(0, -1)) > 90)
+                list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br><hr> 
+                `
+
+        }
+        document.getElementById("top").innerHTML = list
+    })
+}
+
+
+const input = () => {
+    let string = "https://the-trivia-api.com/api/questions?categories="
+    let categories = [];
+    let categoriesCheckedValue = document.querySelectorAll('.categories:checked');
+    if (categoriesCheckedValue.length === 0) {
+        string += "arts_and_literature,film_and_tv,food_and_drink,general_knowledge,geography,history,music,science,society_and_culture,sport_and_leisure"
+    }
+    else if (document.getElementById("random_cat").value == "random,arts_and_literature,film_and_tv,food_and_drink,general_knowledge,geography,history,music,science,society_and_culture,sport_and_leisure") {
+        const cat = document.getElementById("random_cat").value
+        const cat_string = cat.split(",")
+        let i = Math.trunc(Math.random() * 11 + 1)
+        string += cat_string[i];
+    }
+    else {
+        categoriesCheckedValue.forEach((element) => {
+            categories.push(element.value)
+        })
+        string += categories.join(",")
+    }
+    let dif = ["easy", "medium", "hard"]
+    let rnd = Math.trunc(Math.random() * 3)
+    let dificulity = "";
+    let dificulityCheckedValue = document.getElementsByName('dificulity');
+    dificulityCheckedValue.forEach((element) => {
+        if (element.checked && element.value == "random_diff") {
+
+            dificulity = dif[rnd]
+        }
+        else if (element.checked) {
+            dificulity = element.value
+        }
+    })
+
+    const limit = document.getElementById("limit").value
+    if (limit <= 50 && limit > 0) {
+        let link = `${string}&limit=${limit}&dificulty=${dificulity}`
+        return link
+    }
+    else {
+        // window.location.reload()
+        window.alert("Unesite broj pitanja od 1 do 50")
+    }
+}
+
+const switch_to_first_question = () => {
+    document.getElementById("start_container").classList.add("hidden")
+    document.getElementById("start_button").classList.add("hidden")
+    document.getElementById("start_button").classList.remove("btn")
+    document.getElementById("card").classList.remove("hidden")
+    document.getElementById("next").classList.remove("hidden")
+    document.getElementById("next").classList.add("btn")
+
+}
+
+
+const select_buttons_for_answers = () => {
+    const input_a = document.getElementById("a")
+    const input_b = document.getElementById("b")
+    const input_c = document.getElementById("c")
+    const input_d = document.getElementById("d")
+    const input_none = document.getElementById("none")
+    const inputs = []
+    inputs.push(input_a, input_b, input_c, input_d)
+    return inputs.sort(() => Math.random() - 0.5)
+}
+
+const create_object_with_data_from_api = (data) => {
+    const questions = []
+    data.forEach(element => {
+        const question = {
+            question: element.question,
+            a: element.correctAnswer,
+            b: element.incorrectAnswers[0],
+            c: element.incorrectAnswers[1],
+            d: element.incorrectAnswers[2],
+            answers: [element.correctAnswer, element.incorrectAnswers[0], element.incorrectAnswers[1], element.incorrectAnswers[2]],
+            category: element.category,
+            difficulty: element.difficulty
+        }
+        question.correctAnswer = question.a
+        questions.push(question)
+    });
+    return questions
+}
+const add_question = (questionNbr, questions, inputs) => {
+
+    inputs.forEach((element) => {
+        {
+            // element.classList.remove("selected")
+            if (element.classList.contains("correct")) element.classList.remove("correct")
+            if (element.classList.contains("wrong")) element.classList.remove("wrong")
+        }
+    })
+    document.getElementById("question_text").innerText = questions[questionNbr].question
+    document.getElementById("question_category").innerText = `Category : ${questions[questionNbr].category}`
+    document.getElementById("dificulity_text").innerText = `Difficulty : ${questions[questionNbr].difficulty}`
+    inputs.sort(() => Math.random() - 0.5)
+    for (let u = 0; u < 4; u++) {
+        const element = inputs[u];
+        const input = inputs[u]
+        element.innerText = questions[questionNbr].answers[u]
+        input.setAttribute("value", questions[questionNbr].answers[u])
+
+    }
+
+}
+
+
+
+const timer = () =>{
+
+    let time = 0
+    let timer =  setInterval(() => {
+        
+        time += 1000
+        let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((time % (1000 * 60)) / 1000);
+        
+        if(seconds < 10) {
+            document.getElementById("timer").innerHTML = ` ${minutes}min 0${seconds}s `
+        }
+        else{
+            document.getElementById("timer").innerHTML = ` ${minutes}min ${seconds}s `
+
+        }
+        // document.getElementById("timer").innerText = ` ${minutes}min ${seconds}s `
+        
+    }, 1000);
+        if (!document.getElementById("timer").innerText) {
+            return
+        }
+    
+    
+}
+
+const question_timer = () =>{
+    let now = 30000;
+    let question_timer = setInterval(() => {
+        now -= 1000
+        if (now == 0) {
+            alert("Time is up. Please click on next")
+            question_times.push(`Timed out`)
+            console.log("distance 0");
+            document.getElementById("question_timer").innerHTML = ""
+            document.getElementsByName("answer").forEach((element) => element.classList.add("wrong"))
+            document.getElementById("none").click()
+            return
+        }
+        else{
+
+            let minutes = Math.floor(now / 60000);
+            let seconds = (now) / 1000 - Math.floor(minutes * 60);
+            console.log("aaaaaaaaa");
+        if(seconds < 10) {
+            document.getElementById("question_timer").innerHTML = ` ${minutes}min 0${seconds}s `
+        }
+        else{
+            document.getElementById("question_timer").innerHTML = ` ${minutes}min ${seconds}s `
+            
+        }
+    }
+
+
+        
+
+
+    }, 1000);
+    // clearInterval(question_timer)
+}
+    
+    
+const listAns = (answers_from_user, questions, maxQuestions, question_times) => {
+    const list = []
+    for (let i = 0; i < maxQuestions; i++) {
+        const answer_from_user = answers_from_user[i];
+        const question = questions[i].question;
+        const correctAnswer = questions[i].correctAnswer
+        if (document.getElementById("timer").innerHTML) {
+
+
+            if (answer_from_user == correctAnswer) {
+
+                list.push(`<div class="correct_div"><strong>Category: ${questions[i].category} </strong> 
+                <br>
+                <strong>Difficulty: ${questions[i].difficulty} </strong>  <br> <strong> Question: </strong>${question} <br> <strong>Your answer:</strong> ${answer_from_user}  <br><strong> Correct answer: </strong>${correctAnswer} 
+                <br> 
+                <strong>Number of questions: </strong>${maxQuestions}
+                <br>
+                <strong>Time per question: </strong> ${question_times[i]} </div>
+                <hr>
+                
+                `)
+            }
+            else {
+
+                list.push(`<div class="wrong_div"> <strong> Question: </strong> ${question} <br><strong> Your answer:</strong> ${answer_from_user}  <br><strong> Correct answer: </strong>${correctAnswer} 
+                <br> 
+                <strong> Number of questions: </strong>${maxQuestions}
+                <br>
+                <strong>Time per question:</strong> ${question_times[i]}   </div>
+                <hr>
+                
+                `)
+            }
+        }
+        else return
+    }
+
+    return list.join("")
+}
+
+
+
+
+    
+
+
+
+
+
+
+
+
+rules()
+list_games()
+document.getElementById("clear").addEventListener("click", () => localStorage.clear())
+
+
+
+let username = document.getElementById("username").value
+let start_button = document.getElementById("start_button");
+console.log(start_button);
+if (username = "") {
+    alert("Please enter username")
+}
+else {
+
+    start_button.addEventListener("click", () => {
+        console.log("vvvvv");
+        start_game()
+    }
+    );
+}
+
+
+const start_game = () => {
+    fetch(`${input()}`)
+        .then(response => response.json())
+        .then((data) => {
+            let counter = 0;
+            let questionNbr = 0;
+            const maxQuestions = data.length;
+            const answers_from_user = []
+            const question_times = []
+            let username = document.getElementById("username").value
+            switch_to_first_question()
+            const questions = create_object_with_data_from_api(data)
+            const inputs = select_buttons_for_answers()
+            
+            let score = document.getElementById("score");
+            score.innerText = `Question ${questionNbr+1} /${data.length}. Correct answers : ${counter}/${maxQuestions}`
+            
+            add_question(questionNbr, questions, inputs)
+            timer()
+
+         question_timer()
+
+            inputs.forEach(element => {
+                element.addEventListener("click", () => {
+                  
+                    if (element.value == questions[questionNbr].correctAnswer && !document.getElementById("none").classList.contains("wrong")) {
+
+                            inputs.forEach((el) => {
+                                if (!el.classList.contains("wrong") && el == element) {
+                                    console.log("correct");
+                                    document.getElementById("c_w").innerHTML = `This is right answer`
+                                    element.classList.add("correct")
+
+                                        counter++
+                                        answers_from_user.push(element.value)
+                                    
+                                }  
+                            })
+                        }
+                        else{
+
+                            
+                            
+                        console.log("wrong");
+                        answers_from_user.push(element.value)
+                        element.classList.add("wrong")
+                        document.getElementById("c_w").innerHTML = `This is wrong answer`
+                    }                    
+                })
+            })
+
+
+            document.getElementById("next").addEventListener("click", () => {
+                
+                question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3,-1))}s `)
+
+                question_timer()
+        let question_timer1 = document.getElementById("question_timer").innerText
+
+     
+        document.getElementById("none").classList.remove("wrong")
+        document.getElementById("c_w").innerHTML = ""
+        if (questionNbr + 1 == maxQuestions) {
+                    const obj = {
+                        username: username,
+                        percentege: Math.floor(counter / maxQuestions) * 100 + "%",
+                        time: document.getElementById("timer").innerText
+                        
+                    };
+                    localStorage.setItem(`${username}`, JSON.stringify(obj))
+                }
+
+                inputs.forEach(element => {
+                    if (!element.classList.contains("wrong") && !element.classList.contains("correct")) {
+                        return;
+                    }
+                    else{
+                        
+                        if (questionNbr + 1 == data.length) {
+                            document.getElementById("new_game").classList.remove("hidden")
+                        document.getElementById("new_game").classList.add("btn")
+                        document.getElementById("next").classList.remove("btn")
+                        document.getElementById("next").classList.add("hidden")
+                        document.getElementById("card").innerHTML = `Hello  <strong><u>${username}</u></strong> your score is ${counter}/${data.length} (${Math.floor(counter * 100 / data.length)}%)
+                        
+                        <br>
+                        Time: ${document.getElementById("timer").innerText}
+                        <br>
+                        <p>  <br> ${listAns(answers_from_user, questions, data.length, question_times)} </p>
+                        `
+                        
+                            
+                        
+                    }
+                    else {
+
+                        // add_question(questionNbr, questions, inputs)
+                        
+                        document.getElementById("score").innerText = ` Question ${questionNbr + 2} /${data.length}. Correct answers : ${counter}/${maxQuestions}`
+                        questionNbr++
+                        add_question(questionNbr, questions, inputs)
+                        
+                        
+                        
+                        
+                        
+                    }
+                } 
+                // question_timer.clearInterval( )
+
+            })
+
+
+        })
+        
+        
+        
+        
+        
+        
+
+
+        }).catch((err) => console.log(err))
+
+}
