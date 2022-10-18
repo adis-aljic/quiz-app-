@@ -282,6 +282,10 @@ border: 2px double black;
         display: flex;
         flex-direction: column-reverse;
         gap: 50px;
+
+    }
+    .card{
+        width: 400px;
     }
     #results{
      float: right;
