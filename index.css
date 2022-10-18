@@ -288,8 +288,18 @@ border: 2px double black;
     body{
         margin:0
     }
+    .rest_cat{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    .main_container_first_page, .main_container{
+        padding: 1.5rem;
+    }
     .container{
-        width: 420px;
+        width: 90vw;
+        /* padding: -5rem; */
+        
     }
     #results{
      float: right;
