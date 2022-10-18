@@ -232,6 +232,12 @@ ul {
     display: flex;
     justify-content: center;
 }
+.score_listed{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 #score{
     display: flex;
     justify-content: center;

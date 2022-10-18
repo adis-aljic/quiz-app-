@@ -289,6 +289,8 @@ else {
 
 
 const start_game = () => {
+    document.getElementById("card").classList.remove("score_listed")
+
     fetch(`${input()}`)
         .then(response => response.json())
         .then((data) => {
@@ -397,14 +399,14 @@ const start_game = () => {
 
                                 // question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
                             }
-                            document.getElementById("card").innerHTML = `Hello  <strong><u>${username}</u></strong> your score is ${counter}/${data.length} (${Math.floor(counter * 100 / data.length)}%)
-                        
+                            document.getElementById("card").classList.add("score_listed")
+                            document.getElementById("card").innerHTML = `<span>Hello  <strong><u>${username}</u></strong> your score is ${counter}/${data.length} (${Math.floor(counter * 100 / data.length)}%) </span>
+                            
                         <br>
                         Time: ${document.getElementById("timer").innerText}
                         <br>
                         <p>  <br> ${listAns(answers_from_user, questions, data.length, question_times)} </p>
                         `
-
 
 
                         }
