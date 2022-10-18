@@ -307,6 +307,9 @@ const start_game = () => {
             const answers_from_user = []
             const question_times = []
             let username = document.getElementById("username").value
+            if(!username) {
+                username = `Guest-${Math.trunc(Math.random()*10000000)}`
+            }
             switch_to_first_question()
             const questions = create_object_with_data_from_api(data)
             const inputs = select_buttons_for_answers()
