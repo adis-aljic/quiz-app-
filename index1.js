@@ -33,7 +33,7 @@ const input = () => {
     if (categoriesCheckedValue.length === 0) {
         string += "arts_and_literature,film_and_tv,food_and_drink,general_knowledge,geography,history,music,science,society_and_culture,sport_and_leisure"
     }
-    else if (document.getElementById("random_cat").value == "random,arts_and_literature,film_and_tv,food_and_drink,general_knowledge,geography,history,music,science,society_and_culture,sport_and_leisure") {
+    else if (categoriesCheckedValue == "random,arts_and_literature,film_and_tv,food_and_drink,general_knowledge,geography,history,music,science,society_and_culture,sport_and_leisure") {
         const cat = document.getElementById("random_cat").value
         const cat_string = cat.split(",")
         let i = Math.trunc(Math.random() * 11 + 1)
@@ -44,7 +44,9 @@ const input = () => {
             categories.push(element.value)
         })
         string += categories.join(",")
+        
     }
+    console.log(string);
     let dif = ["easy", "medium", "hard"]
     let rnd = Math.trunc(Math.random() * 3)
     let dificulity = "";
@@ -166,14 +168,8 @@ const timer = () => {
 
 }
 
-const question_timer = (question_times, parametar = 2) => {
-    if(parametar == 1) {
-        console.log("clear int");
-        clearInterval(question_timer)
-       
-        return
-    }
-    else {
+const question_timer = (question_times) => {
+
 
         let now = 30000;
         var question_timer = setInterval(() => {
@@ -212,7 +208,7 @@ const question_timer = (question_times, parametar = 2) => {
         
         
     }, 1000);
-}
+
  return 
     // clearInterval(question_timer) gdjeeeeeeee !!!!!!!!!!
 }
@@ -228,6 +224,7 @@ const listAns = (answers_from_user, questions, maxQuestions, question_times) => 
 
 
             if (answer_from_user == correctAnswer) {
+                // counter++
 
                 list.push(`<div class="correct_div"><strong>Category: ${questions[i].category} </strong> 
                 <br>
@@ -312,21 +309,35 @@ const start_game = () => {
             timer()
 
             question_timer(question_times)
-
+            const first_answers = []
             inputs.forEach(element => {
                 element.addEventListener("click", () => {
-            if(!answers_from_user.includes(element.value)) {
-
-                if (element.value == questions[questionNbr].correctAnswer && !document.getElementById("none").classList.contains("wrong")) {
                     
+            if(!answers_from_user.includes(element.value)) {
+                const first_answer = {};
+                    first_answer.answer = element.value
+                    first_answer.question = questions[questionNbr]
+                    first_answers.push(first_answer)
+                    
+                if (element.value == questions[questionNbr].correctAnswer && !document.getElementById("none").classList.contains("wrong")) {
+                    console.log(first_answers);
                         inputs.forEach((el) => {
-                            if (!el.classList.contains("wrong") && el == element) {
+                            if (!el.classList.contains("wrong") && el == element ) {
+                                
                                 console.log("correct");
                                 document.getElementById("c_w").innerHTML = `This is right answer`
                                 element.classList.add("correct")
-                                
-                                counter++
                                 answers_from_user.push(element.value)
+                                  
+                                                            counter++
+
+                                 
+
+                                    
+                                
+                                
+                                    
+                            
                                 
                             }
                         })
@@ -345,12 +356,17 @@ const start_game = () => {
             })
 
             document.getElementById("next").addEventListener("click", () => {
-                clearInterval(question_timer(question_times,1))    // KAKOOOOOOOOOOOOOOOOOOOOOO
+                // clearInterval(question_timer(question_times,1))    // KAKOOOOOOOOOOOOOOOOOOOOOO
+                // inputs.forEach((input) =>{
+                //     if (input.classList.contains("correct")) {
+                //         counter++
+
+                //     }
+                // })
                 if(document.getElementById("question_timer") != null) {
                     
                     question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
                 }
-                question_timer(question_times,1)
                 question_timer(question_times)
 
                 document.getElementById("none").classList.remove("wrong")
@@ -372,7 +388,7 @@ const start_game = () => {
                     else {
 
                         if (questionNbr + 1 == data.length) {
-                            clearInterval(question_timer(question_times,1)) // ?????
+                            // clearInterval(question_timer(question_times,1)) // ?????
                             document.getElementById("new_game").classList.remove("hidden")
                             document.getElementById("new_game").classList.add("btn")
                             document.getElementById("next").classList.remove("btn")
@@ -394,7 +410,7 @@ const start_game = () => {
                         }
                         else {
                             // add_question(questionNbr, questions, inputs)
-                            
+                           
                             document.getElementById("score").innerText = ` Question ${questionNbr + 2} /${data.length}. Correct answers : ${counter}/${maxQuestions}`
                             questionNbr++
                             add_question(questionNbr, questions, inputs)
