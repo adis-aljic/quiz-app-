@@ -282,12 +282,17 @@ border: 2px double black;
         display: flex;
         flex-direction: column-reverse;
         gap: 50px;
+        margin: 0;
 
     }
-    .card{
-        width: 400px;
+    body{
+        margin:0
+    }
+    .container{
+        width: 480px;
     }
     #results{
      float: right;
+     margin: auto;
     }
 }
