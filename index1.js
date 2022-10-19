@@ -142,7 +142,8 @@ const add_question = (questionNbr, questions, inputs,question_times) => {
         input.setAttribute("value", questions[questionNbr].answers[u])
 
     }
-
+    
+    console.log(question_times);
 }
 
 
@@ -180,11 +181,11 @@ const timer = () => {
 
 const question_timer = (question_times) => {
     
-
-    let now = 10000;
+    
+    let now = 11000;
     var question_timer_int = setInterval(() => {
         now -= 1000
-        if (now == -1000) {
+        if (now == 0) {
             alert("Time is up. Please click on next")
             question_times.push(`Timed out`)
             console.log("distance 0");
@@ -198,35 +199,36 @@ const question_timer = (question_times) => {
             // return
         }
         else {
-
+            
             let minutes = Math.floor(now / 60000);
             let seconds = (now) / 1000 - Math.floor(minutes * 60);
-            console.log("aaaaaaaaa");
+            
             if (document.getElementById("timer") != null && seconds < 10) {
 
                 document.getElementById("question_timer").innerHTML = ` ${minutes}min 0${seconds}s `
             }
             else if (document.getElementById("timer") != null && seconds >= 10) {
                 document.getElementById("question_timer").innerHTML = ` ${minutes}min ${seconds}s `
-
+                
             }
-
+            
         }
-
-
-
-
-
     }, 1000);
+    document.getElementById("next").addEventListener("click", ()=> {
+        
+        // question_times.push(document.getElementById("question_timer").innerText.slice(-3,-1))
+            
+            
+                clearInterval(question_timer_int)
+            // }
+        })
+
+
+
+
 
     
-        document.getElementById("next").addEventListener("click", ()=>{
-            // if (document.getElementById("question_timer") != null) {
-                        
-            //     question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
-            // }
-            clearInterval(question_timer_int)
-        })
+       
 
 }
 
@@ -249,7 +251,7 @@ const listAns = (answers_from_user, questions, maxQuestions, question_times) => 
                 <br> 
                 <strong>Number of questions: </strong>${maxQuestions}
                 <br>
-                <strong>Time per question: </strong> ${question_times[i]} </div>
+                <strong>Time per question: </strong> 0:${question_times[i]}s </div>
                 <hr>
                 
                 `)
@@ -260,7 +262,7 @@ const listAns = (answers_from_user, questions, maxQuestions, question_times) => 
                 <br> 
                 <strong> Number of questions: </strong>${maxQuestions}
                 <br>
-                <strong>Time per question:</strong> ${question_times[i]}   </div>
+                <strong>Time per question:</strong> 0:${question_times[i]}s   </div>
                 <hr>
                 
                 `)
@@ -339,12 +341,12 @@ const start_game = () => {
                         first_answers.push(first_answer)
 
                         if (element.value == questions[questionNbr].correctAnswer && !document.getElementById("none").classList.contains("wrong")) {
-                            console.log(first_answers);
                             inputs.forEach((el) => {
                                 if (!el.classList.contains("wrong") && el == element) {
 
                                     console.log("correct");
                                     play_correct()
+
                                     document.getElementById("c_w").innerHTML = `This is correct answer`
                                     element.classList.add("correct")
                                     answers_from_user.push(element.value)
@@ -356,6 +358,7 @@ const start_game = () => {
                             play_wrong()
                             console.log("wrong");
                             answers_from_user.push(element.value)
+
                             element.classList.add("wrong")
                             document.getElementById("c_w").innerHTML = `This is wrong answer`
                         }
@@ -365,11 +368,11 @@ const start_game = () => {
 
             document.getElementById("next").addEventListener("click", () => {
        
-                if (document.getElementById("question_timer") != null) {
+                // if (document.getElementById("question_timer") != null) {
 
-                    question_times.push(`0:${Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
-                    console.log(`0:${Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `);
-                }
+                    question_times.push(`${10 - document.getElementById("question_timer").innerText.slice(-3, -1)}`)
+                    console.log(`0:${10 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `);
+                // }
 
                 document.getElementById("none").classList.remove("wrong")
                 document.getElementById("c_w").innerHTML = ""
@@ -390,7 +393,9 @@ const start_game = () => {
                     else {
 
                         if (questionNbr + 1 == data.length) {
-                            // clearInterval(question_timer(question_times,1)) // ?????
+                            // question_times.push(`${document.getElementById("question_timer").innerText}`)
+                            // question_times.push(`${10 - Number(document.getElementById("question_timer").innerText.slice(-3,-1))}`)
+                                // console.log(question_times);
                             document.getElementById("new_game").classList.remove("hidden")
                             document.getElementById("new_game").classList.add("btn")
                             document.getElementById("next").classList.remove("btn")
