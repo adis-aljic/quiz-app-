@@ -254,6 +254,7 @@ ul {
 #score{
     display: flex;
     justify-content: center;
+    
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; 
 padding: 1rem;
 
@@ -273,9 +274,17 @@ padding: 1rem;
     background-color: rgb(190, 90, 9);
     color: whitesmoke;
 }
+.mute{
+    /* display: flex; */
+    /* float: left; */
+    padding-top: 0.5rem;
+    /* flex-direction: row; */
+    /* justify-content: center; */
+    /* align-items: center; */
+}
 .wrong{
-    background-color: rgb(190, 90, 9);
     color: whitesmoke;
+    background-color: rgb(190, 90, 9);
 }
 .correct_div{
     background-color: rgb(120, 245, 104);
@@ -385,7 +394,7 @@ ul{
     
 .btn {
     /* line-height: 10px; */
-    /* height: 5px; */
+    /* height: 5px;  */
     text-align: center;
     /* width: 50px; */
     cursor: pointer;
@@ -419,7 +428,8 @@ ul{
     outline: none;
     position: relative;
     padding: 10px;
-    }
+
+margin-bottom: 1rem;}
   
   
   .button:hover, .button:focus {

@@ -9,18 +9,30 @@ const rules = () => {
     )
 }
 
+const mute = ()=>{
+
+}
+
+
 const list_games = () => {
-    document.getElementById("list_games").addEventListener("click", () => {
+    window.addEventListener("load", () => {
         let list = ""
+        let  cnt = 0
         for (let i = 0; i < localStorage.length; i++) {
 
             let key = localStorage.key(i);
 
             let value = localStorage.getItem(key);
             let user = JSON.parse(value)
-            if (Number(user.percentege.slice(0, -1)) > 90)
-                list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br><hr> 
-                `
+            if (Number(user.percentege.slice(0, -1)) > 90) {
+                    while(cnt<4){
+                            cnt++
+                        list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br><hr> 
+                        `
+                    }
+                    
+                    
+            }
 
         }
         document.getElementById("top").innerHTML = list
@@ -33,6 +45,12 @@ function play_correct() {
 function play_wrong() {
     var audio = new Audio('wrong.mp3');
     audio.play();
+
+        document.getElementById("muted").addEventListener("click", ()=>{
+console.log("muted");
+            audio.muted();
+        })    
+    
 }
 
 const input = () => {
@@ -251,7 +269,7 @@ const listAns = (answers_from_user, questions, maxQuestions, question_times) => 
                 <br> 
                 <strong>Number of questions: </strong>${maxQuestions}
                 <br>
-                <strong>Time per question: </strong> 0:${question_times[i]}s </div>
+                <strong>Time per question: </strong> ${question_times[i]} </div>
                 <hr>
                 
                 `)
@@ -262,7 +280,7 @@ const listAns = (answers_from_user, questions, maxQuestions, question_times) => 
                 <br> 
                 <strong> Number of questions: </strong>${maxQuestions}
                 <br>
-                <strong>Time per question:</strong> 0:${question_times[i]}s   </div>
+                <strong>Time per question:</strong> ${question_times[i]}   </div>
                 <hr>
                 
                 `)
@@ -345,7 +363,10 @@ const start_game = () => {
                                 if (!el.classList.contains("wrong") && el == element) {
 
                                     console.log("correct");
-                                    play_correct()
+        // if(document.getElementById("next").clicked())     {
+
+            play_correct()
+        // }   
 
                                     document.getElementById("c_w").innerHTML = `This is correct answer`
                                     element.classList.add("correct")
@@ -355,10 +376,12 @@ const start_game = () => {
                             })
                         }
                         else {
-                            play_wrong()
                             console.log("wrong");
                             answers_from_user.push(element.value)
+                            // if(document.getElementById("next").clicked())     {
 
+                                play_wrong()
+                            // }   
                             element.classList.add("wrong")
                             document.getElementById("c_w").innerHTML = `This is wrong answer`
                         }
@@ -370,8 +393,7 @@ const start_game = () => {
        
                 // if (document.getElementById("question_timer") != null) {
 
-                    question_times.push(`${10 - document.getElementById("question_timer").innerText.slice(-3, -1)}`)
-                    console.log(`0:${10 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `);
+                    question_times.push(`0:${10 - document.getElementById("question_timer").innerText.slice(-3, -1)}s`)
                 // }
 
                 document.getElementById("none").classList.remove("wrong")
