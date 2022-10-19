@@ -195,7 +195,7 @@ const question_timer = (question_times) => {
             document.getElementsByName("answer").forEach((element) => element.classList.add("wrong"))
             document.getElementById("none").click()
             clearInterval(question_timer_int)
-            return
+            // return
         }
         else {
 
