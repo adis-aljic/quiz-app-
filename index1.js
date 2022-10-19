@@ -179,7 +179,7 @@ const timer = () => {
 }
 
 const question_timer = (question_times) => {
-
+    
 
     let now = 30000;
     var question_timer_int = setInterval(() => {
@@ -221,6 +221,10 @@ const question_timer = (question_times) => {
 
     
         document.getElementById("next").addEventListener("click", ()=>{
+            if (document.getElementById("question_timer") != null) {
+                        
+                question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
+            }
             clearInterval(question_timer_int)
         })
 
@@ -362,10 +366,10 @@ const start_game = () => {
 
             document.getElementById("next").addEventListener("click", () => {
        
-                if (document.getElementById("question_timer") != null) {
+                // if (document.getElementById("question_timer") != null) {
 
-                    question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
-                }
+                //     question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
+                // }
 
                 document.getElementById("none").classList.remove("wrong")
                 document.getElementById("c_w").innerHTML = ""
