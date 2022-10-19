@@ -367,8 +367,8 @@ const start_game = () => {
        
                 if (document.getElementById("question_timer") != null) {
 
-                    question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
-                    console.log(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `);
+                    question_times.push(`0:${Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
+                    console.log(`0:${Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `);
                 }
 
                 document.getElementById("none").classList.remove("wrong")
