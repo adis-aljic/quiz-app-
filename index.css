@@ -270,10 +270,12 @@ padding: 1rem;
 
 
 .correct{
-    background-color: rgb(94, 233, 75);
+    background-color: rgb(190, 90, 9);
+    color: whitesmoke;
 }
 .wrong{
-    background-color: rgb(209, 9, 9);
+    background-color: rgb(190, 90, 9);
+    color: whitesmoke;
 }
 .correct_div{
     background-color: rgb(120, 245, 104);
