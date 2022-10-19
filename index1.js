@@ -186,15 +186,15 @@ const question_timer = (question_times) => {
         now -= 1000
         if (now == -1000) {
             alert("Time is up. Please click on next")
-            clearInterval(question_timer_int)
             question_times.push(`Timed out`)
             console.log("distance 0");
             if (document.getElementById("question_timer" != null)) {
-
+                
                 document.getElementById("question_timer").innerHTML = ""
             }
             document.getElementsByName("answer").forEach((element) => element.classList.add("wrong"))
             document.getElementById("none").click()
+            clearInterval(question_timer_int)
             return
         }
         else {
