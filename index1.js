@@ -181,10 +181,10 @@ const timer = () => {
 const question_timer = (question_times) => {
     
 
-    let now = 30000;
+    let now = 10000;
     var question_timer_int = setInterval(() => {
         now -= 1000
-        if (now == 0) {
+        if (now == -1000) {
             alert("Time is up. Please click on next")
             clearInterval(question_timer_int)
             question_times.push(`Timed out`)
@@ -221,14 +221,13 @@ const question_timer = (question_times) => {
 
     
         document.getElementById("next").addEventListener("click", ()=>{
-            if (document.getElementById("question_timer") != null) {
+            // if (document.getElementById("question_timer") != null) {
                         
-                question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
-            }
+            //     question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
+            // }
             clearInterval(question_timer_int)
         })
 
-    // clearInterval(question_timer) gdjeeeeeeee !!!!!!!!!!
 }
 
 
@@ -366,10 +365,11 @@ const start_game = () => {
 
             document.getElementById("next").addEventListener("click", () => {
        
-                // if (document.getElementById("question_timer") != null) {
+                if (document.getElementById("question_timer") != null) {
 
-                //     question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
-                // }
+                    question_times.push(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `)
+                    console.log(`0:${30 - Number(document.getElementById("question_timer").innerText.slice(-3, -1))}s `);
+                }
 
                 document.getElementById("none").classList.remove("wrong")
                 document.getElementById("c_w").innerHTML = ""
