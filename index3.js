@@ -154,8 +154,10 @@ const create_object_with_data_from_api = (data) => {
 const add_question = (questionNbr, questions, inputs, question_times) => {
     document.getElementById("c_w").innerHTML = ""
     document.activeElement.blur()
+    
 
     inputs.forEach((element) => {
+        element.classList.remove("ans:hover")
         {
             if (element.classList.contains("correct")) element.classList.remove("correct")
             if (element.classList.contains("wrong")) element.classList.remove("wrong")
