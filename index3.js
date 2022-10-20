@@ -50,6 +50,7 @@ const find_total_time = (question_times) => {
 
 let muted_button_name = document.getElementById("muted");
 let unmuted_button_name = document.getElementById("unmuted");
+unmuted_button_name.volume = 0.5;
 
 muted_button_name.addEventListener("click", () => {
     document.getElementById("correct").muted = true;
@@ -63,8 +64,6 @@ muted_button_name.addEventListener("click", () => {
 unmuted_button_name.addEventListener("click", () => {
     document.getElementById("correct").muted = false;
     document.getElementById("wrong").muted = false;
-    document.getElementById("correct").volume = 0.5;
-    document.getElementById("wrong").volume = 0.5;
     muted_button_name.value = "Mute"
     console.log("klik 2");
     muted_button_name.classList.remove("hidden")
