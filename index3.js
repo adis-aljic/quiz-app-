@@ -37,14 +37,15 @@ const find_total_time = (question_times) => {
     let times = 0;
     for (let i = 0; i < question_times.length; i++) {
         const element = question_times[i].slice(2, 3);
+        console.log(element);
         times += Number(element);
     }
     let seconds = Math.floor(times % 60)
     let minutes = (times - seconds) % 60
     if (seconds < 10) {
-        return `${minutes}:0${seconds}s`
+        return `${minutes}:${seconds}s`
     }
-    else return `${minutes}:0${seconds}s`
+    else return `${minutes}:${seconds}s`
 }
 
 let muted_button_name = document.getElementById("muted");
@@ -161,7 +162,6 @@ const add_question = (questionNbr, questions, inputs, question_times) => {
     document.getElementById("question_text").innerText = questions[questionNbr].question
     document.getElementById("question_category").innerText = `Category : ${questions[questionNbr].category}`
     document.getElementById("dificulity_text").innerText = `Difficulty : ${questions[questionNbr].difficulty}`
-    // console.log(document.getElementById("dificulity_text").innerText);
     inputs.sort(() => Math.random() - 0.5)
     for (let u = 0; u < 4; u++) {
         const element = inputs[u];
@@ -186,7 +186,7 @@ const question_timer = (question_times, inputs, questionNbr, questions) => {
             document.getElementsByName("answer").forEach((element) => element.classList.add("wrong"))
             document.getElementById("a").click()
             clearInterval(question_timer_int)
-        }
+        }   
         else {
             let minutes = Math.floor(now / 60000);
             let seconds = (now) / 1000 - Math.floor(minutes * 60);
