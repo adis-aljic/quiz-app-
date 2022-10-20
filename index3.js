@@ -165,6 +165,7 @@ const add_question = (questionNbr, questions, inputs, question_times) => {
     document.getElementById("dificulity_text").innerText = `Difficulty : ${questions[questionNbr].difficulty}`
     inputs.sort(() => Math.random() - 0.5)
     for (let u = 0; u < 4; u++) {
+        inputs[u].blur()
         const element = inputs[u];
         const input = inputs[u]
         element.innerText = questions[questionNbr].answers[u]
