@@ -153,6 +153,7 @@ const create_object_with_data_from_api = (data) => {
 }
 const add_question = (questionNbr, questions, inputs, question_times) => {
     document.getElementById("c_w").innerHTML = ""
+    document.activeElement.blur()
 
     inputs.forEach((element) => {
         {
@@ -290,7 +291,6 @@ const start_game = () => {
             const first_answers = []
             inputs.forEach(element => {
                 element.addEventListener("click", () => {
-                    document.activeElement.blur()
 
                     if (!answers_from_user.includes(element.value)) {
                         const first_answer = {};
