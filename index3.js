@@ -19,11 +19,12 @@ show_more.addEventListener("click", ()=>{
 const rules = () => {
     document.getElementById("rules").addEventListener("click", () =>
         alert(`
-    For game to start first choose username, difficulty, categories and number of question.
-    You can  choose one difficulty, one more then one catogory and up to 50 questions per one game.
-    Your score is range as percentage for correct answers. 
-    Top players, with score of 90% and more, are listed bellow "TOP 90% players".
-    Good Luck`)
+        For game to start first choose username, difficulty, categories and number of question.
+        You can choose one difficulty, one or more categories and up to 50 questions per one game.
+        Your score is range as percentage for correct answers. 
+        Top players, with score over 90%, are listed below "Over 90% players".
+        Good Luck!
+    `)
     )
 }
 
@@ -38,7 +39,7 @@ const list_games = () => {
             let value = localStorage.getItem(key);
             let user = JSON.parse(value)
             if (Number(user.percentege.slice(0, -1)) > 90) {
-                list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br>Difficultuy: ${user.difficulty} <br>   <hr> `
+                list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br>Difficulty: ${user.difficulty} <br>   <hr> `
             }
         }
         document.getElementById("top").innerHTML = list
