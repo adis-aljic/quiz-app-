@@ -81,6 +81,7 @@ body {
 }
 .top_list{
     overflow-y: scroll;
+    height: 30vh;
     
 }
 #results{
@@ -90,7 +91,7 @@ body {
    border-radius: 15px;
    /* margin-right: 2rem;   */
    /* width: 10vw; */
-   height: 50vh;
+   height: 60vh;
    border-radius: 5px;
    margin-left: 10rem;
    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
