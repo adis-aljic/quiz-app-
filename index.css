@@ -44,11 +44,11 @@ padding-bottom: 5rem;
     color: white;
     /* border-style: none; */
 }
-.ans:hover{
+/* .ans:hover{
     color: white;
     background-color: rgb(162, 48, 238);
     border: 1px solid blue;
-}
+} */
 
 body {
     display: flex;

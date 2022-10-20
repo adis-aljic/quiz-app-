@@ -157,7 +157,7 @@ const add_question = (questionNbr, questions, inputs, question_times) => {
     
 
     inputs.forEach((element) => {
-        element.classList.remove("ans:hover")
+        // element.classList.remove("ans:hover")
         {
             if (element.classList.contains("correct")) element.classList.remove("correct")
             if (element.classList.contains("wrong")) element.classList.remove("wrong")
