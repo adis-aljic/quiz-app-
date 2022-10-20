@@ -15,49 +15,37 @@ const list_games = () => {
     window.addEventListener("load", () => {
         let list = ""
         for (let i = 0; i < localStorage.length; i++) {
-
             let key = localStorage.key(i);
-
             let value = localStorage.getItem(key);
             let user = JSON.parse(value)
             if (Number(user.percentege.slice(0, -1)) > 90) {
-               
-                    list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br><hr> 
-                    
-                        `
-                
-                console.log(list);
-                
+                list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br><hr>`
             }
-            
         }
-        console.log(list);
         document.getElementById("top").innerHTML = list
     })
 }
-const play_correct =() => {
+const play_correct = () => {
     let audio = document.getElementById("correct");
     audio.play();
-
-
 }
-const play_wrong = () =>{
+const play_wrong = () => {
     let audio = document.getElementById("wrong");
     audio.play();
-
 }
-const find_total_time = (question_times) =>{
-let times = 0;
-for (let i = 0; i < question_times.length; i++) {
-    const element = question_times[i].slice(2,-1);
-    times += Number(element);
+const find_total_time = (question_times) => {
+    let times = 0;
+    for (let i = 0; i < question_times.length; i++) {
+        const element = question_times[i].slice(2, 3);
+        times += Number(element);
+    }
+    let seconds = Math.floor(times % 60)
+    let minutes = (times - seconds) % 60
+    if (seconds < 10) {
+        return `${minutes}:0${seconds}s`
+    }
+    else return `${minutes}:0${seconds}s`
 }
-let seconds = Math.floor(times%60)
-let minutes = (times - seconds)%60
-
-return `${minutes}:${seconds}s`
-}
-
 
 let muted_button_name = document.getElementById("muted");
 let unmuted_button_name = document.getElementById("unmuted");
@@ -65,14 +53,10 @@ let unmuted_button_name = document.getElementById("unmuted");
 muted_button_name.addEventListener("click", () => {
     document.getElementById("correct").muted = true;
     document.getElementById("wrong").muted = true;
-    // muted_button_name.value = "Unmute"
-    // console.log(muted_button_name.value );
     console.log("klik");
     unmuted_button_name.classList.remove("hidden")
     muted_button_name.classList.add("hidden")
-
 })
-
 
 unmuted_button_name.addEventListener("click", () => {
     document.getElementById("correct").muted = false;
@@ -82,8 +66,6 @@ unmuted_button_name.addEventListener("click", () => {
     muted_button_name.classList.remove("hidden")
     unmuted_button_name.classList.add("hidden")
 })
-
-
 
 
 const input = () => {
@@ -127,7 +109,6 @@ const input = () => {
         return link
     }
     else {
-        // window.location.reload()
         window.alert("Unesite broj pitanja od 1 do 50")
     }
 }
@@ -137,18 +118,14 @@ const switch_to_first_question = () => {
     document.getElementById("start_button").classList.add("hidden")
     document.getElementById("start_button").classList.remove("btn")
     document.getElementById("card").classList.remove("hidden")
-    // document.getElementById("next").classList.remove("hidden")
-    // document.getElementById("next").classList.add("btn")
 
 }
-
 
 const select_buttons_for_answers = () => {
     const input_a = document.getElementById("a")
     const input_b = document.getElementById("b")
     const input_c = document.getElementById("c")
     const input_d = document.getElementById("d")
-    const input_none = document.getElementById("none")
     const inputs = []
     inputs.push(input_a, input_b, input_c, input_d)
     return inputs.sort(() => Math.random() - 0.5)
@@ -173,7 +150,6 @@ const create_object_with_data_from_api = (data) => {
     return questions
 }
 const add_question = (questionNbr, questions, inputs, question_times) => {
-    document.getElementById("none").classList.remove("wrong")
     document.getElementById("c_w").innerHTML = ""
 
     inputs.forEach((element) => {
@@ -185,104 +161,49 @@ const add_question = (questionNbr, questions, inputs, question_times) => {
     document.getElementById("question_text").innerText = questions[questionNbr].question
     document.getElementById("question_category").innerText = `Category : ${questions[questionNbr].category}`
     document.getElementById("dificulity_text").innerText = `Difficulty : ${questions[questionNbr].difficulty}`
-    console.log(document.getElementById("dificulity_text").innerText);
+    // console.log(document.getElementById("dificulity_text").innerText);
     inputs.sort(() => Math.random() - 0.5)
     for (let u = 0; u < 4; u++) {
         const element = inputs[u];
         const input = inputs[u]
         element.innerText = questions[questionNbr].answers[u]
         input.setAttribute("value", questions[questionNbr].answers[u])
-
     }
 }
 
 
-
-// const timer = () => {
-
-//     let time = 0
-//     let timer = setInterval(() => {
-
-//         time += 1000
-//         let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
-//         let seconds = Math.floor((time % (1000 * 60)) / 1000);
-//         if (document.getElementById("timer") != null) {
-
-
-//             if (seconds < 10) {
-
-//                 document.getElementById("timer").innerHTML = ` ${minutes}min 0${seconds}s `
-//             }
-//             else {
-
-//                 document.getElementById("timer").innerHTML = ` ${minutes}min ${seconds}s `
-//             }
-//             // document.getElementById("timer").innerText = ` ${minutes}min ${seconds}s `
-//         }
-//         else return
-
-//     }, 1000);
-//     if (!document.getElementById("timer").innerText) {
-//         return
-//     }
-
-
-// }
-
-const question_timer = (question_times, inputs) => {
-
+const question_timer = (question_times, inputs, questionNbr, questions) => {
 
     let now = 21000;
     var question_timer_int = setInterval(() => {
         now -= 1000
         if (now == 0) {
-            alert("Time is up. Please click on next")
-            question_times.push(`Timed out`)
-            console.log("distance 0");
+            alert("Time is up.")
+            question_times.push(`0:20s Timed out`)
             if (document.getElementById("question_timer" != null)) {
-
                 document.getElementById("question_timer").innerHTML = ""
             }
             document.getElementsByName("answer").forEach((element) => element.classList.add("wrong"))
-            document.getElementById("none").click()
+            document.getElementById("a").click()
             clearInterval(question_timer_int)
-            // return
         }
         else {
-
             let minutes = Math.floor(now / 60000);
             let seconds = (now) / 1000 - Math.floor(minutes * 60);
-
             if (seconds < 10) {
-
                 document.getElementById("question_timer").innerHTML = ` ${minutes}min 0${seconds}s `
             }
             else if (seconds >= 10) {
                 document.getElementById("question_timer").innerHTML = ` ${minutes}min ${seconds}s `
-
             }
-
         }
     }, 1000);
+
     inputs.forEach((input) => {
-
         input.addEventListener("click", () => {
-
-// question_times.push(`0:${10 - document.getElementById("question_timer").innerText.slice(-3, -1)}s`)
-            
-
             clearInterval(question_timer_int)
         })
-        // }
     })
-
-
-
-
-
-
-
-
 }
 
 
@@ -292,51 +213,30 @@ const listAns = (answers_from_user, questions, maxQuestions, question_times) => 
         const answer_from_user = answers_from_user[i];
         const question = questions[i].question;
         const correctAnswer = questions[i].correctAnswer
-        // if (document.getElementById("timer").innerHTML) {
-
-
-            if (answer_from_user == correctAnswer) {
-                // counter++
-
-                list.push(`<div class="correct_div"><strong>Category: ${questions[i].category} </strong> 
+        if (answer_from_user == correctAnswer) {
+            list.push(`<div class="correct_div"><strong>Category: ${questions[i].category} </strong> 
                 <br>
                 <strong>Difficulty: ${questions[i].difficulty} </strong>  <br> <strong> Question: </strong>${question} <br> <strong>Your answer:</strong> ${answer_from_user}  <br><strong> Correct answer: </strong>${correctAnswer} 
                 <br> 
                 <strong>Number of questions: </strong>${maxQuestions}
                 <br>
                 <strong>Time per question: </strong> ${question_times[i]} </div>
-                <hr>
-                
-                `)
-            }
-            else {
-
-                list.push(`<div class="wrong_div"> <strong> Question: </strong> ${question} <br><strong> Your answer:</strong> ${answer_from_user}  <br><strong> Correct answer: </strong>${correctAnswer} 
+                <hr> `
+            )
+        }
+        else {
+            list.push(`<div class="wrong_div"> <strong> Question: </strong> ${question} <br><strong> Your answer:</strong> ${answer_from_user}  <br><strong> Correct answer: </strong>${correctAnswer} 
                 <br> 
                 <strong> Number of questions: </strong>${maxQuestions}
                 <br>
                 <strong>Time per question:</strong> ${question_times[i]}   </div>
-                <hr>
-                
-                `)
-            }
+                <hr> `
+            )
         }
-        // else return
-    // }
+    }
 
     return list.join("")
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 rules()
@@ -344,14 +244,7 @@ list_games()
 document.getElementById("clear").addEventListener("click", () => localStorage.clear())
 
 
-
-
-let start_button = document.getElementById("start_button");
-
-    start_button.addEventListener("click", () => {
-        start_game()
-    }
-    );
+document.getElementById("start_button").addEventListener("click", () => start_game());
 
 
 
@@ -366,24 +259,22 @@ const start_game = () => {
             const maxQuestions = data.length;
             const answers_from_user = []
             const question_times = []
+
             let username = document.getElementById("username").value
-       
             if (username == "undefiend" || username == "function" || username == "null") {
                 username = "Don't be like that"
                 alert("Be nice, don't break me !")
                 window.location.reload()
             }
-            else if (username.length > 10) {
+            if (username.length > 10) {
                 alert(`Username must be under 10 characters .`)
                 window.location.reload()
 
             }
-            else if (username = "") {
+            if (!username) {
                 username = `Guest-${Math.trunc(Math.random() * 10000000)}`
             }
-            else{
-                username = document.getElementById("username").value
-            }
+
             switch_to_first_question()
             const questions = create_object_with_data_from_api(data)
             const inputs = select_buttons_for_answers()
@@ -392,84 +283,65 @@ const start_game = () => {
             score.innerText = `Question ${questionNbr + 1} /${data.length}. Correct answers : ${counter}/${maxQuestions}`
 
             add_question(questionNbr, questions, inputs, question_times)
-            // timer()
-            question_timer(question_times, inputs)
+            question_timer(question_times, inputs, questionNbr, questions)
+
 
             const first_answers = []
             inputs.forEach(element => {
                 element.addEventListener("click", () => {
+
                     if (!answers_from_user.includes(element.value)) {
                         const first_answer = {};
                         first_answer.answer = element.value
                         first_answer.question = questions[questionNbr]
                         first_answers.push(first_answer)
-                        
-                        if (element.value == questions[questionNbr].correctAnswer && !document.getElementById("none").classList.contains("wrong")) {
+
+                        if (element.value == questions[questionNbr].correctAnswer) {
                             inputs.forEach((el) => {
                                 if (!el.classList.contains("wrong") && el == element) {
                                     question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(-3, -1)}s`)
-                                    
-                                    console.log("correct");
                                     play_correct()
-                                    document.getElementById("c_w").innerHTML = `This is correct answer`
+                                    // document.getElementById("c_w").innerHTML = `This is correct answer`
                                     element.classList.add("correct")
                                     answers_from_user.push(element.value)
-                                counter++
-                            }
-                        })
+                                    counter++
+                                }
+                            })
+                        }
+                        else {
+                            console.log("wrong");
+                            answers_from_user.push(element.value)
+                            question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(-3, -1)}s`)
+                            play_wrong()
+                            element.classList.add("wrong")
+                            // document.getElementById("c_w").innerHTML = `This is wrong answer`
+                        }
                     }
-
-
-                    else {
-                        console.log("wrong");
-                        answers_from_user.push(element.value)
-                        question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(-3, -1)}s`)
-                        
-                        play_wrong()
-                        element.classList.add("wrong")
-                        document.getElementById("c_w").innerHTML = `This is wrong answer`
-                    }
-                }
-
 
                     if (questionNbr + 1 == data.length) {
                         document.getElementById("card").classList.add("score_listed")
                         document.getElementById("card").innerHTML = `<span>Hello  <strong><u>${username}</u></strong> your score is ${counter}/${data.length} (${Math.floor(counter * 100 / data.length)}%) </span>Time: ${find_total_time(question_times)}
                         <br>
-                        <p class="score_listed">  <br> ${listAns(answers_from_user, questions, data.length, question_times)} </p>
-                        `
+                        <p class="score_listed">  <br> ${listAns(answers_from_user, questions, data.length, question_times)} </p>`
                         document.getElementById("new_game").classList.remove("hidden")
                         document.getElementById("new_game").classList.add("btn")
-                      
-                            const obj = {
-                                username: username,
-                                percentege: Math.floor(counter / maxQuestions) * 100 + "%",
-                                time: find_total_time(question_times)
-                            }
-                            
-                            localStorage.setItem(`${username}`, JSON.stringify(obj))
+                        const obj = {
+                            username: username,
+                            percentege: Math.floor(counter / maxQuestions) * 100 + "%",
+                            time: find_total_time(question_times)
                         }
-
-                        else {
-                            
-                            setTimeout(() => {
-                                
-                                question_timer(question_times, inputs)
-                                questionNbr++
-                                add_question(questionNbr, questions, inputs, question_times)
-                                document.getElementById("score").innerText = ` Question ${questionNbr + 2} /${data.length}. Correct answers : ${counter}/${maxQuestions}`
-                            }, 1000);
-
-                            
-                           
-                        
+                        localStorage.setItem(`${username}`, JSON.stringify(obj))
+                    }
+                    else {
+                        setTimeout(() => {
+                            question_timer(question_times, inputs, questionNbr, questions)
+                            questionNbr++
+                            add_question(questionNbr, questions, inputs, question_times)
+                            document.getElementById("score").innerText = ` Question ${questionNbr + 1} /${data.length}. Correct answers : ${counter}/${maxQuestions}`
+                        }, 1000);
                     }
                 })
             })
-
-
-
-
 
         }).catch((err) => console.log(err))
 
