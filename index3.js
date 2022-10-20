@@ -181,15 +181,15 @@ const question_timer = (question_times, inputs, questionNbr, questions) => {
     let now = 21000;
     var question_timer_int = setInterval(() => {
         now -= 1000
-        if (now == 0) {
+        if (now == -1000) {
             alert("Time is up.")
-            question_times.push(`0:20s Timed out`)
             if (document.getElementById("question_timer" != null)) {
                 document.getElementById("question_timer").innerHTML = ""
             }
             document.getElementsByName("answer").forEach((element) => element.classList.add("wrong"))
             document.getElementById("a").click()
             clearInterval(question_timer_int)
+            question_times.push(`0:20s Timed out`)
         }   
         else {
             let minutes = Math.floor(now / 60000);
@@ -211,6 +211,35 @@ const question_timer = (question_times, inputs, questionNbr, questions) => {
 }
 
 
+const timer = () => {
+
+    let time = 0
+    let timer = setInterval(() => {
+
+        time += 1000
+        let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((time % (1000 * 60)) / 1000);
+        if (document.getElementById("timer") != null) {
+
+
+            if (seconds < 10) {
+
+                document.getElementById("timer").innerHTML = ` ${minutes}min 0${seconds}s `
+            }
+            else {
+
+                document.getElementById("timer").innerHTML = ` ${minutes}min ${seconds}s `
+            }
+        }
+        else return
+
+    }, 1000);
+    if (!document.getElementById("timer").innerText) {
+        return
+    }
+
+
+}
 const listAns = (answers_from_user, questions, maxQuestions, question_times) => {
     const list = []
     for (let i = 0; i < maxQuestions; i++) {
@@ -285,10 +314,10 @@ const start_game = () => {
 
             let score = document.getElementById("score");
             score.innerText = `Question ${questionNbr + 1} /${data.length}. Correct answers : ${counter}/${maxQuestions}`
-
+            timer()
             add_question(questionNbr, questions, inputs, question_times)
             question_timer(question_times, inputs, questionNbr, questions)
-
+// console.log(document.getElementById("question_timer").innerText);
 
             const first_answers = []
             inputs.forEach(element => {
@@ -303,6 +332,7 @@ const start_game = () => {
                         if (element.value == questions[questionNbr].correctAnswer) {
                             inputs.forEach((el) => {
                                 if (!el.classList.contains("wrong") && el == element) {
+                                    
                                     question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(-3, -1)}s`)
                                     play_correct()
                                     // document.getElementById("c_w").innerHTML = `This is correct answer`
@@ -323,16 +353,19 @@ const start_game = () => {
                     }
 
                     if (questionNbr + 1 == data.length) {
-                        document.getElementById("card").classList.add("score_listed")
-                        document.getElementById("card").innerHTML = `<span>Hello  <strong><u>${username}</u></strong> your score is ${counter}/${data.length} (${Math.floor(counter * 100 / data.length)}%) </span>Time: ${find_total_time(question_times)}
-                        <br>
-                        <p class="score_listed">  <br> ${listAns(answers_from_user, questions, data.length, question_times)} </p>`
-                        document.getElementById("new_game").classList.remove("hidden")
-                        document.getElementById("new_game").classList.add("btn")
+                        setTimeout(() => {
+                            
+                            document.getElementById("card").classList.add("score_listed")
+                            document.getElementById("card").innerHTML = `<span>Hello  <strong><u>${username}</u></strong> your score is ${counter}/${data.length} (${Math.floor(counter * 100 / data.length)}%) </span>Time: ${document.getElementById("timer").innerHTML}
+                            <br>
+                            <p class="score_listed">  <br> ${listAns(answers_from_user, questions, data.length, question_times)} </p>`
+                            document.getElementById("new_game").classList.remove("hidden")
+                            document.getElementById("new_game").classList.add("btn")
+                        }, 800);
                         const obj = {
                             username: username,
                             percentege: Math.floor(counter / maxQuestions) * 100 + "%",
-                            time: find_total_time(question_times)
+                            time: document.getElementById("timer").innerHTML
                         }
                         localStorage.setItem(`${username}`, JSON.stringify(obj))
                     }
@@ -342,7 +375,7 @@ const start_game = () => {
                             questionNbr++
                             add_question(questionNbr, questions, inputs, question_times)
                             document.getElementById("score").innerText = ` Question ${questionNbr + 1} /${data.length}. Correct answers : ${counter}/${maxQuestions}`
-                        }, 1000);
+                        }, 800);
                     }
                 })
             })
