@@ -189,8 +189,10 @@ h1 {
 }
 
 .card {
+    height: max-content;
     padding: 4rem;
-
+overflow-y: scroll;
+scrollbar-track-color: blue;
 }
 
 li {
