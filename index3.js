@@ -50,7 +50,8 @@ const find_total_time = (question_times) => {
 
 let muted_button_name = document.getElementById("muted");
 let unmuted_button_name = document.getElementById("unmuted");
-unmuted_button_name.volume = 0.5;
+document.getElementById("wrong").volume = 0.1;
+document.getElementById("correct").volume = 0.1;
 
 muted_button_name.addEventListener("click", () => {
     document.getElementById("correct").muted = true;
