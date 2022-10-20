@@ -4,7 +4,7 @@ const rules = () => {
     For game to start first choose username, difficulty, categories and number of question.
     You can  choose one difficulty, one more then one catogory and up to 50 questions per one game.
     Your score is range as percentage for correct answers. 
-    Top players, with score of 90% and more, are listed on "TOP 90% players" button.
+    Top players, with score of 90% and more, are listed bellow "TOP 90% players".
     Good Luck`)
     )
 }
