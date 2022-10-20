@@ -32,6 +32,8 @@ padding-bottom: 5rem;
     align-items: center;
     min-width: 100%;
     word-wrap: break-word;
+    word-wrap: break-word;
+    line-break: auto;
     border-radius: 5px;
     flex-wrap: wrap;
     height: 3rem;
