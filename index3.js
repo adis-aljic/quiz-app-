@@ -195,11 +195,18 @@ const question_timer = (question_times, inputs, questionNbr, questions) => {
             let minutes = Math.floor(now / 60000);
             let seconds = (now) / 1000 - Math.floor(minutes * 60);
             if (seconds < 10) {
-                document.getElementById("question_timer").innerHTML = ` ${minutes}min 0${seconds}s `
+                document.getElementById("question_timer").innerHTML = `<span hidden> ${minutes}min 0${seconds}s </span>`
+
             }
             else if (seconds >= 10) {
-                document.getElementById("question_timer").innerHTML = ` ${minutes}min ${seconds}s `
+                document.getElementById("question_timer").innerHTML = `<span hidden> ${minutes}min ${seconds}s </span>`
+                
             }
+            let a = ""
+            for (let i = 0; i < seconds; i++) {
+                a += "<b>||</b>"
+            }
+            document.getElementById("timer_stripes").innerHTML = `${a}`
         }
     }, 1000);
 
@@ -356,7 +363,8 @@ const start_game = () => {
                         setTimeout(() => {
                             
                             document.getElementById("card").classList.add("score_listed")
-                            document.getElementById("card").innerHTML = `<span>Hello  <strong><u>${username}</u></strong> your score is ${counter}/${data.length} (${Math.floor(counter * 100 / data.length)}%) </span>Time: ${document.getElementById("timer").innerHTML}
+                            // Time: ${document.getElementById("timer").innerHTML}
+                            document.getElementById("card").innerHTML = `<span>Hello  <strong><u>${username}</u></strong> your score is ${counter}/${data.length} (${Math.floor(counter * 100 / data.length)}%) </span>
                             <br>
                             <p class="score_listed">  <br> ${listAns(answers_from_user, questions, data.length, question_times)} </p>`
                             document.getElementById("new_game").classList.remove("hidden")
