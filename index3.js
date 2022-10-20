@@ -154,7 +154,8 @@ const create_object_with_data_from_api = (data) => {
 const add_question = (questionNbr, questions, inputs, question_times) => {
     document.getElementById("c_w").innerHTML = ""
     document.activeElement.blur()
-    
+    document.getElementById("timer_stripes").classList.remove("correct")
+    document.getElementById("timer_stripes").classList.remove("wrong")
 
     inputs.forEach((element) => {
         // element.classList.remove("ans:hover")
@@ -204,7 +205,14 @@ const question_timer = (question_times, inputs, questionNbr, questions) => {
             }
             let a = ""
             for (let i = 0; i < seconds; i++) {
-                a += ` <span style="font-wheight:1500"><b>|</b></span>`
+             
+
+                    a += ` <span style="font-weight:20000"><b>|</b></span>`
+                
+            }
+            document.getElementById("timer_stripes").classList.add("correct")
+            if(now == 5000) {
+                document.getElementById("timer_stripes").classList.add("wrong")
             }
             document.getElementById("timer_stripes").innerHTML = `${a}`
         }

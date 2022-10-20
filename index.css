@@ -196,11 +196,12 @@ scrollbar-track-color: blue;
 }
 #timer_stripes{
     display: flex;
-    justify-content: space-evenly;
-    gap: 2px;
+    justify-content: flex-start;
+    gap: 0.9rem;
     align-items: center;
-    font-weight: 600;
-
+    font-weight: 2000;
+    border-radius: 10px;
+padding-left: 1rem;
 }
 
 li {
