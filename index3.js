@@ -31,6 +31,7 @@ const rules = () => {
 
 
 
+
 const list_games = () => {
     window.addEventListener("load", () => {
         let list = ""
