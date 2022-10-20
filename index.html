@@ -10,13 +10,14 @@
 </head>
 
 <body >
- 
+    <audio id="wrong" src="./wrong.mp3" ></audio>
+    <audio id="correct" src="./correct.mp3"></audio>
     <div class="main">
         <div id="results">
             <div class="mute">
-                <button id="muted">mute</button>
+                <button id="muted" class="mtd_btn"><img  class="icon_sound" src="./mute.png" alt="" srcset=""></button>
+                <button id="unmuted"  class="hidden mtd_btn"><img  class="icon_sound"src="./sound.png" alt="" srcset=""></button>
             </div>
-            <br>
             <br>
             <div>
                 <div class="wrap">
@@ -159,7 +160,7 @@
                     <br>
                             <p class="timers" id="score"></p>
 <br>
-                            <p class="timers" >Total time: <span id="timer"></span></p>
+                            <!-- <p class="timers" >Total time: <span id="timer"></span></p> -->
                             <!-- <div id="q_timer"> -->
                                 <p class="timers" id="q_t_span">Time for question: <span id="question_timer"></span></p>
                             <!-- </div> -->
@@ -200,7 +201,7 @@
 
     </div>
 
-    <script src="index1.js"></script>
+    <script src="index3.js"></script>
 </body>
 
 </html> 
