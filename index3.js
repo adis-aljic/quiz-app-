@@ -1,4 +1,20 @@
+const show_less = document.getElementById("s_less")
+const show_more = document.getElementById("s_more")
 
+show_less.addEventListener("click", ()=>{
+
+    document.getElementById("overide").classList.add("hidden")
+    document.getElementById("s_less").classList.add("hidden")
+    document.getElementById("categories_scroll").classList.remove("hidden")
+    document.getElementById("s_more").classList.remove("hidden")
+})
+show_more.addEventListener("click", ()=>{
+
+    document.getElementById("overide").classList.remove("hidden")
+    document.getElementById("s_less").classList.remove("hidden")
+    document.getElementById("categories_scroll").classList.add("hidden")
+    document.getElementById("s_more").classList.add("hidden")
+})
 
 const rules = () => {
     document.getElementById("rules").addEventListener("click", () =>

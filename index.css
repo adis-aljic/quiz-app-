@@ -1,3 +1,11 @@
+#s_more, #s_less{
+    color: blue;
+    font-weight: 900;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -23,7 +31,17 @@ padding-bottom: 5rem;
     background-blend-mode: difference;
     padding-top: 7rem;
 }
-/* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+
+.overide{
+    margin: auto;
+    height: auto;
+    list-style: none;
+    display: block;
+    overflow: visible;
+    overflow-y: none;
+    scroll-behavior: smooth;
+    padding: 1rem;
+}
 .ans{
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;   
      display: flex;
@@ -33,7 +51,8 @@ padding-bottom: 5rem;
     align-items: center;
     min-width: 100%;
     max-width: 8rem;
-    word-wrap: break-word;
+    white-space: normal;
+word-wrap: break-word;
     line-break: auto;
     border-radius: 5px;
     flex-wrap: wrap;
