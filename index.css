@@ -31,7 +31,7 @@ padding-bottom: 5rem;
     justify-content: center;
     align-items: center;
     min-width: 100%;
-    word-wrap: break-word;
+    max-width: 8rem;
     word-wrap: break-word;
     line-break: auto;
     border-radius: 5px;
@@ -44,11 +44,11 @@ padding-bottom: 5rem;
     color: white;
     /* border-style: none; */
 }
-/* .ans:hover{
+.ans:hover{
     color: white;
     background-color: rgb(162, 48, 238);
     border: 1px solid blue;
-} */
+}
 
 body {
     display: flex;
