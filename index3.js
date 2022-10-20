@@ -345,23 +345,14 @@ document.getElementById("clear").addEventListener("click", () => localStorage.cl
 
 
 
-let username = document.getElementById("username").value
-if (username == "undefiend" || username == "function" || username == "null") {
-    username = "Don't be like that"
-    alert("Be nice, don't break me !")
-    window.location.reload
-}
+
 let start_button = document.getElementById("start_button");
-if (username = "") {
-    alert("Please enter username")
-}
-else {
 
     start_button.addEventListener("click", () => {
         start_game()
     }
     );
-}
+
 
 
 const start_game = () => {
@@ -376,6 +367,7 @@ const start_game = () => {
             const answers_from_user = []
             const question_times = []
             let username = document.getElementById("username").value
+       
             if (username == "undefiend" || username == "function" || username == "null") {
                 username = "Don't be like that"
                 alert("Be nice, don't break me !")
@@ -386,8 +378,11 @@ const start_game = () => {
                 window.location.reload()
 
             }
-            else if (!username) {
+            else if (username = "") {
                 username = `Guest-${Math.trunc(Math.random() * 10000000)}`
+            }
+            else{
+                username = document.getElementById("username").value
             }
             switch_to_first_question()
             const questions = create_object_with_data_from_api(data)
