@@ -38,7 +38,7 @@ const list_games = () => {
             let value = localStorage.getItem(key);
             let user = JSON.parse(value)
             if (Number(user.percentege.slice(0, -1)) > 90) {
-                list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br><hr>`
+                list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br>Difficultuy: ${user.difficulty} <br>   <hr> `
             }
         }
         document.getElementById("top").innerHTML = list
@@ -416,7 +416,8 @@ const start_game = () => {
                         const obj = {
                             username: username,
                             percentege: Math.floor(counter / maxQuestions) * 100 + "%",
-                            time: document.getElementById("timer").innerHTML
+                            time: document.getElementById("timer").innerHTML,
+                            difficulty: questions[0].difficulty
                         }
                         localStorage.setItem(`${username}`, JSON.stringify(obj))
                     }
