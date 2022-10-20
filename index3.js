@@ -340,7 +340,7 @@ const start_game = () => {
                             inputs.forEach((el) => {
                                 if (!el.classList.contains("wrong") && el == element) {
                                     
-                                    question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(-3, -1)}s`)
+                                    question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(5, 7)}s`)
                                     play_correct()
                                     // document.getElementById("c_w").innerHTML = `This is correct answer`
                                     element.classList.add("correct")
@@ -352,7 +352,8 @@ const start_game = () => {
                         else {
                             console.log("wrong");
                             answers_from_user.push(element.value)
-                            question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(-3, -1)}s`)
+                            question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(5, 7)}s`)
+                            console.log(document.getElementById("question_timer").innerText.slice(5, 7));
                             play_wrong()
                             element.classList.add("wrong")
                             // document.getElementById("c_w").innerHTML = `This is wrong answer`
