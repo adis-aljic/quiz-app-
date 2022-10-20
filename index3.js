@@ -50,8 +50,7 @@ const find_total_time = (question_times) => {
 
 let muted_button_name = document.getElementById("muted");
 let unmuted_button_name = document.getElementById("unmuted");
-audio.volume = 0.1;
-// document.getElementById("correct").volume = 0.1;
+// audio.volume = 0.1;
 
 muted_button_name.addEventListener("click", () => {
     document.getElementById("correct").muted = true;
@@ -340,7 +339,11 @@ const start_game = () => {
             const first_answers = []
             inputs.forEach(element => {
                 element.addEventListener("click", () => {
-
+                        element.disabled = true;
+                        setTimeout(() => {
+                            element.disabled = false;
+                            
+                        }, 800);
                     if (!answers_from_user.includes(element.value)) {
                         const first_answer = {};
                         first_answer.answer = element.value
@@ -350,8 +353,13 @@ const start_game = () => {
                         if (element.value == questions[questionNbr].correctAnswer) {
                             inputs.forEach((el) => {
                                 if (!el.classList.contains("wrong") && el == element) {
-                                    
-                                    question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(5, 7)}s`)
+                                    if(document.getElementById("question_timer").innerText.slice(5, 7) == 0) {
+
+                                        question_times.push(`0:${document.getElementById("question_timer").innerText.slice(5, 7)}s`)
+                                    } else{
+
+                                        question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(5, 7)}s`)
+                                    }
                                     play_correct()
                                     // document.getElementById("c_w").innerHTML = `This is correct answer`
                                     element.classList.add("correct")
@@ -363,9 +371,13 @@ const start_game = () => {
                         else {
                             console.log("wrong");
                             answers_from_user.push(element.value)
-                            question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(5, 7)}s`)
-                            console.log(document.getElementById("question_timer").innerText.slice(5, 7));
-                            play_wrong()
+                            if(document.getElementById("question_timer").innerText.slice(5, 7) == 0) {
+
+                                question_times.push(`0:${document.getElementById("question_timer").innerText.slice(5, 7)}s`)
+                            } else{
+
+                                question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(5, 7)}s`)
+                            }                            play_wrong()
                             element.classList.add("wrong")
                             // document.getElementById("c_w").innerHTML = `This is wrong answer`
                         }
