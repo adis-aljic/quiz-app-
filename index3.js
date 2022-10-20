@@ -54,6 +54,7 @@ let unmuted_button_name = document.getElementById("unmuted");
 muted_button_name.addEventListener("click", () => {
     document.getElementById("correct").muted = true;
     document.getElementById("wrong").muted = true;
+    
     console.log("klik");
     unmuted_button_name.classList.remove("hidden")
     muted_button_name.classList.add("hidden")
@@ -62,6 +63,8 @@ muted_button_name.addEventListener("click", () => {
 unmuted_button_name.addEventListener("click", () => {
     document.getElementById("correct").muted = false;
     document.getElementById("wrong").muted = false;
+    document.getElementById("correct").volume = 0.5;
+    document.getElementById("wrong").volume = 0.5;
     muted_button_name.value = "Mute"
     console.log("klik 2");
     muted_button_name.classList.remove("hidden")
