@@ -195,16 +195,16 @@ const question_timer = (question_times, inputs, questionNbr, questions) => {
             let minutes = Math.floor(now / 60000);
             let seconds = (now) / 1000 - Math.floor(minutes * 60);
             if (seconds < 10) {
-                document.getElementById("question_timer").innerHTML = `<span hidden> ${minutes}min 0${seconds}s </span>`
+                document.getElementById("question_timer").innerHTML = `${minutes}min 0${seconds}s>`
 
             }
             else if (seconds >= 10) {
-                document.getElementById("question_timer").innerHTML = `<span hidden> ${minutes}min ${seconds}s </span>`
+                document.getElementById("question_timer").innerHTML = `${minutes}min ${seconds}s `
                 
             }
             let a = ""
             for (let i = 0; i < seconds; i++) {
-                a += "<b>||</b>"
+                a += ` <span style="font-wheight:1500"><b>|</b></span>`
             }
             document.getElementById("timer_stripes").innerHTML = `${a}`
         }
@@ -231,11 +231,11 @@ const timer = () => {
 
             if (seconds < 10) {
 
-                document.getElementById("timer").innerHTML = ` ${minutes}min 0${seconds}s `
+                document.getElementById("timer").innerHTML = `  ${minutes}min 0${seconds}s `
             }
             else {
 
-                document.getElementById("timer").innerHTML = ` ${minutes}min ${seconds}s `
+                document.getElementById("timer").innerHTML = `  ${minutes}min ${seconds}s `
             }
         }
         else return
