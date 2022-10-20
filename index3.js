@@ -195,7 +195,7 @@ const question_timer = (question_times, inputs, questionNbr, questions) => {
             let minutes = Math.floor(now / 60000);
             let seconds = (now) / 1000 - Math.floor(minutes * 60);
             if (seconds < 10) {
-                document.getElementById("question_timer").innerHTML = `${minutes}min 0${seconds}s>`
+                document.getElementById("question_timer").innerHTML = `${minutes}min 0${seconds}s`
 
             }
             else if (seconds >= 10) {
