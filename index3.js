@@ -14,7 +14,6 @@ const rules = () => {
 const list_games = () => {
     window.addEventListener("load", () => {
         let list = ""
-        let cnt = 0
         for (let i = 0; i < localStorage.length; i++) {
 
             let key = localStorage.key(i);
@@ -22,16 +21,17 @@ const list_games = () => {
             let value = localStorage.getItem(key);
             let user = JSON.parse(value)
             if (Number(user.percentege.slice(0, -1)) > 90) {
-                while (cnt < 4) {
-                    cnt++
+               
                     list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br><hr> 
+                    
                         `
-                }
-
-
+                
+                console.log(list);
+                
             }
-
+            
         }
+        console.log(list);
         document.getElementById("top").innerHTML = list
     })
 }
@@ -49,16 +49,12 @@ const play_wrong = () =>{
 const find_total_time = (question_times) =>{
 let times = 0;
 for (let i = 0; i < question_times.length; i++) {
-    console.log(question_times[i]);
     const element = question_times[i].slice(2,-1);
-    console.log(element);
     times += Number(element);
 }
-console.log(times);
 let seconds = Math.floor(times%60)
 let minutes = (times - seconds)%60
-console.log(minutes);
-console.log(seconds);
+
 return `${minutes}:${seconds}s`
 }
 
