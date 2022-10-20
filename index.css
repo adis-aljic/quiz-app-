@@ -15,12 +15,13 @@ padding-bottom: 5rem;
     display: flex;
     width: 60vw;
     height: 10vh;
-    z-index: 100;
+    z-index: 1;
     /* border-radius: 30px; */
     /* border: 5px solid black; */
     /* background-image: none; */
     background-blend-mode:color;
     background-blend-mode: difference;
+    padding-top: 7rem;
 }
 /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
 .ans{
@@ -194,6 +195,10 @@ h1 {
 overflow-y: scroll;
 scrollbar-track-color: blue;
 }
+#card{
+    height: max-content;
+    padding: 4rem;
+}
 #timer_stripes{
     display: flex;
     justify-content: flex-start;
@@ -213,7 +218,29 @@ ul {
     list-style-type: none;
     padding: 0;
 }
+#ul{
+    list-style-type: none;
+    padding: 0;
+    margin: auto;
+    height: fit-content;
+    overflow-y:hidden;
+    list-style: none;
+    display: block;
+ 
+    scroll-behavior: smooth;
+    /* padding: 1rem; */
+}
+#li{
 
+    font-size: 1rem;
+    /* margin-top: 1rem; */
+}
+#s_more, #s_less{
+    float: right;
+    color: #06067e;
+    font-weight: 900;
+    cursor: pointer;
+}
 .buttonDiv {
     padding: 1rem;
     display: flex;
@@ -413,18 +440,26 @@ ul{
     padding: 1rem;
 }
 
+
 ::-webkit-scrollbar-thumb{
-    background-color: rgb(54, 113, 182);
-    border-radius: 40%;
-    height: 1rem;
+    background-color: rgb(111, 69, 224);
+    border-radius: 40px;
+    /* height: 0.5rem; */
+    width: 0.5rem;
+    height: 0.5rem;
 }
-::-webkit-scrollbar-button{
-    background-color: transparent;
-}
+
 ::-webkit-scrollbar{
-    /* color: wheat; */
     border-radius: 25px;
-    width: 1rem;
+    width: 1.4rem;
+    height: 0.5rem;
+}
+::-webkit-scrollbar-track-piece{
+    border-radius: 20px;
+    height: 0.5rem;
+    color: black;
+    background-color: rgb(170, 170, 252);
+    width: 0.5rem;
 }
 
 
@@ -469,4 +504,8 @@ ul{
 margin-bottom: 1rem;}
   
   
-  
+
+
+  #overflow{
+overflow-y: visible;
+  }
