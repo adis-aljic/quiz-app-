@@ -92,7 +92,7 @@ const input = () => {
     console.log(string);
     let dif = ["easy", "medium", "hard"]
     let rnd = Math.trunc(Math.random() * 3)
-    let dificulity = "";
+    // let dificulity = "";
     let dificulityCheckedValue = document.getElementsByName('dificulity');
     dificulityCheckedValue.forEach((element) => {
         if (element.checked && element.value == "random_diff") {
@@ -103,10 +103,11 @@ const input = () => {
             dificulity = element.value
         }
     })
-
+console.log(dificulity);
     const limit = document.getElementById("limit").value
     if (limit <= 50 && limit > 0) {
-        let link = `${string}&limit=${limit}&dificulty=${dificulity}`
+        let link = `${string}&limit=${limit}&difficulty=${dificulity}`
+        console.log(link);
         return link
     }
     else {
