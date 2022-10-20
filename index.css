@@ -195,10 +195,7 @@ h1 {
 overflow-y: scroll;
 scrollbar-track-color: blue;
 }
-#card{
-    height: max-content;
-    padding: 4rem;
-}
+
 #timer_stripes{
     display: flex;
     justify-content: flex-start;
@@ -218,29 +215,7 @@ ul {
     list-style-type: none;
     padding: 0;
 }
-#ul{
-    list-style-type: none;
-    padding: 0;
-    margin: auto;
-    height: fit-content;
-    overflow-y:hidden;
-    list-style: none;
-    display: block;
- 
-    scroll-behavior: smooth;
-    /* padding: 1rem; */
-}
-#li{
 
-    font-size: 1rem;
-    /* margin-top: 1rem; */
-}
-#s_more, #s_less{
-    float: right;
-    color: #06067e;
-    font-weight: 900;
-    cursor: pointer;
-}
 .buttonDiv {
     padding: 1rem;
     display: flex;
@@ -458,7 +433,6 @@ ul{
     border-radius: 20px;
     height: 0.5rem;
     color: black;
-    background-color: rgb(170, 170, 252);
     width: 0.5rem;
 }
 
@@ -506,6 +480,3 @@ margin-bottom: 1rem;}
   
 
 
-  #overflow{
-overflow-y: visible;
-  }
