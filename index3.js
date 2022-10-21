@@ -201,7 +201,7 @@ const add_question = (questionNbr, questions, inputs, question_times) => {
 }
 
 
-const question_timer = (question_times, inputs, questionNbr, questions) => {
+const question_timer = (question_times, inputs, answers_from_user) => {
 
     let now = 21000;
     var question_timer_int = setInterval(() => {
@@ -215,6 +215,7 @@ const question_timer = (question_times, inputs, questionNbr, questions) => {
             document.getElementById("a").click()
             clearInterval(question_timer_int)
             question_times.push(`0:20s Timed out`)
+            answers_from_user.push("Timed out")
         }   
         else {
             let minutes = Math.floor(now / 60000);
@@ -355,7 +356,7 @@ const start_game = () => {
             score.innerText = `Question ${questionNbr + 1} /${data.length}. Correct answers : ${counter}/${maxQuestions}`
             timer()
             add_question(questionNbr, questions, inputs, question_times)
-            question_timer(question_times, inputs, questionNbr, questions)
+            question_timer(question_times, inputs, answers_from_user)
 // console.log(document.getElementById("question_timer").innerText);
 
             const first_answers = []
@@ -426,7 +427,7 @@ const start_game = () => {
                     }
                     else {
                         setTimeout(() => {
-                            question_timer(question_times, inputs, questionNbr, questions)
+                            question_timer(question_times, inputs, answers_from_user)
                             questionNbr++
                             add_question(questionNbr, questions, inputs, question_times)
                             document.getElementById("score").innerText = ` Question ${questionNbr + 1} /${data.length}. Correct answers : ${counter}/${maxQuestions}`
