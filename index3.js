@@ -23,6 +23,7 @@ For the game to start first choose your username, difficulty, desired categories
 You can choose one of the difficulty options, one or more categories and up to 50 questions per game.
 Your score is based on the percentage of correct answers. 
 Top players with a score over 90 % are listed in the "Over 90% players" rankings.
+Good luck :)
     `)
     )
 }
