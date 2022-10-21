@@ -19,7 +19,7 @@ show_more.addEventListener("click", ()=>{
 const rules = () => {
     document.getElementById("rules").addEventListener("click", () =>
         alert(`
-        For the game to start first choose your username, difficulty, desired categories and the number of questions you want to answer. 
+For the game to start first choose your username, difficulty, desired categories and the number of questions you want to answer. 
 You can choose one of the difficulty options, one or more categories and up to 50 questions per game.
 Your score is based on the percentage of correct answers. 
 Top players with a score over 90 % are listed in the "Over 90% players" rankings.
