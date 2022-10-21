@@ -192,6 +192,7 @@ const add_question = (questionNbr, questions, inputs, question_times) => {
     inputs.forEach((element) => {
         // element.classList.remove("ans:hover")
         {
+            
             if (element.classList.contains("correct")) element.classList.remove("correct")
             if (element.classList.contains("wrong")) element.classList.remove("wrong")
         }
@@ -216,14 +217,16 @@ const question_timer = (question_times, inputs, answers_from_user) => {
         now -= 1000
         if (now == -1000) {
             alert("Time is up.")
+            clearInterval(question_timer_int)
             if (document.getElementById("question_timer" != null)) {
                 document.getElementById("question_timer").innerHTML = ""
             }
+            // document.getElementsByName("answer").forEach((element) => element.classList.add("wrong"))
             document.getElementsByName("answer").forEach((element) => element.classList.add("wrong"))
-            document.getElementById("a").click()
-            clearInterval(question_timer_int)
             question_times.push(`0:20s Timed out`)
             answers_from_user.push("Timed out")
+            console.log(answers_from_user);
+            document.getElementById("a").click()
         }   
         else {
             let minutes = Math.floor(now / 60000);
@@ -294,6 +297,7 @@ const listAns = (answers_from_user, questions, maxQuestions, question_times) => 
         const answer_from_user = answers_from_user[i];
         const question = questions[i].question;
         const correctAnswer = questions[i].correctAnswer
+
         if (answer_from_user == correctAnswer) {
             list.push(`<div class="correct_div"><strong>Category: ${questions[i].category} </strong> 
                 <br>
