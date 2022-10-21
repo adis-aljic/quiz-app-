@@ -44,7 +44,15 @@ const list_games = () => {
                 list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br>Difficulty: ${user.difficulty} <br>   <hr> `
             }
         }
-        document.getElementById("top").innerHTML = list
+        if(list = "") {
+
+            document.getElementById("top").innerHTML = list
+        }
+        else{
+            document.getElementById("top").innerHTML = "There is no top playes"
+
+
+        }
     })
 }
 const play_correct = () => {
