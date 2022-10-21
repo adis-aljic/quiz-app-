@@ -5,7 +5,12 @@
     font-size: 1.1rem;
     float: right;
 }
-
+.hr{
+    height: 5px;
+    background-color: transparent;
+    border-left: none;
+    border-right: none;
+}
 
 * {
     box-sizing: border-box;
