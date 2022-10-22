@@ -1,20 +1,11 @@
 const slider = document.getElementById('limit');
-const volume = document.getElementById("volume")
 
 const rangeValue = function(){
   let newValue = slider.value;
   let value = document.querySelector('.value');
   value.innerHTML = newValue;
 }
-const volume_audio = function(){
-  let newValue = volume.value;
-  let value_audio = document.querySelector('.value_audio');
-  value_audio.innerHTML = newValue;
-  audio.volume = newValue/100
-//   return newValue/100
-}
 slider.addEventListener("input", rangeValue);
-volume.addEventListener("input", volume_audio);
 
 const selectAllCategoriesAutomaticly = (j) =>{
     let class_name = `all${j}`;
