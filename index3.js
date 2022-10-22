@@ -1,6 +1,5 @@
 const selectAllCategoriesAutomaticly = (j) =>{
     let class_name = `all${j}`;
-    // console.log(class_name);
     const cat_all = [];
     const categories_all = document.getElementsByClassName("categories");
     for (let i = 0; i < categories_all.length; i++) {
@@ -14,11 +13,9 @@ console.log( document.getElementsByClassName(`all${j}`)[0].checked);
     document.getElementsByClassName(`${class_name}`)[0].addEventListener("change", () => {
         
         if ((document.getElementsByClassName(`${class_name}`)[0].checked) ) {
-            console.log("aaa");
             
             for (let i = 0; i < cat_all.length; i++) {
                 const element = cat_all[i];
-                // console.log(document.getElementsByClassName(`${element}`));
                 document.getElementById(`${element}`).checked = true;
                 document.getElementById(`${element}1`).checked = true;
                 
