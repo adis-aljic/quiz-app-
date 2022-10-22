@@ -1,14 +1,56 @@
+const selectAllCategoriesAutomaticly = (j) =>{
+    let class_name = `all${j}`;
+    // console.log(class_name);
+    const cat_all = [];
+    const categories_all = document.getElementsByClassName("categories");
+    for (let i = 0; i < categories_all.length; i++) {
+        const element = categories_all[i].id;
+        if (!cat_all.includes(element) && element != `all` && element != "random_cat" && element != "categories") {
+            cat_all.push(element)
+    }
+}
+
+console.log( document.getElementsByClassName(`all${j}`)[0].checked);
+    document.getElementsByClassName(`${class_name}`)[0].addEventListener("change", () => {
+        
+        if ((document.getElementsByClassName(`${class_name}`)[0].checked) ) {
+            console.log("aaa");
+            
+            for (let i = 0; i < cat_all.length; i++) {
+                const element = cat_all[i];
+                // console.log(document.getElementsByClassName(`${element}`));
+                document.getElementById(`${element}`).checked = true;
+                document.getElementById(`${element}1`).checked = true;
+                
+        }
+    }
+    else if (!(document.getElementsByClassName(`${class_name}`)[0].checked) ){
+        for (let i = 0; i < cat_all.length; i++) {
+            const element = cat_all[i];
+            document.getElementById(`${element}`).checked = false;
+            document.getElementById(`${element}1`).checked = false;
+        }
+        
+    }
+})
+
+}
+
+selectAllCategoriesAutomaticly(1)
+selectAllCategoriesAutomaticly(2)
+
+
 const show_less = document.getElementById("s_less")
 const show_more = document.getElementById("s_more")
 
-show_less.addEventListener("click", ()=>{
+show_less.addEventListener("click", () => {
 
     document.getElementById("overide").classList.add("hidden")
     document.getElementById("s_less").classList.add("hidden")
     document.getElementById("categories_scroll").classList.remove("hidden")
     document.getElementById("s_more").classList.remove("hidden")
 })
-show_more.addEventListener("click", ()=>{
+show_more.addEventListener("click", () => {
 
     document.getElementById("overide").classList.remove("hidden")
     document.getElementById("s_less").classList.remove("hidden")
@@ -44,11 +86,11 @@ const list_games = () => {
                 list += `Username: ${user.username} <br> Percentege:  ${user.percentege} <br> Time ${user.time} <br>Difficulty: ${user.difficulty} <br>   <hr> `
             }
         }
-        if(list = "") {
+        if (list = "") {
 
             document.getElementById("top").innerHTML = list
         }
-        else{
+        else {
             document.getElementById("top").innerHTML = "There is no top playes"
 
 
@@ -85,7 +127,7 @@ let unmuted_button_name = document.getElementById("unmuted");
 muted_button_name.addEventListener("click", () => {
     document.getElementById("correct").muted = true;
     document.getElementById("wrong").muted = true;
-    
+
     console.log("klik");
     unmuted_button_name.classList.remove("hidden")
     muted_button_name.classList.add("hidden")
@@ -135,7 +177,7 @@ const input = () => {
             dificulity = element.value
         }
     })
-console.log(dificulity);
+    console.log(dificulity);
     const limit = document.getElementById("limit").value
     if (limit <= 50 && limit > 0) {
         let link = `${string}&limit=${limit}&difficulty=${dificulity}`
@@ -192,7 +234,7 @@ const add_question = (questionNbr, questions, inputs, question_times) => {
     inputs.forEach((element) => {
         // element.classList.remove("ans:hover")
         {
-            
+
             if (element.classList.contains("correct")) element.classList.remove("correct")
             if (element.classList.contains("wrong")) element.classList.remove("wrong")
         }
@@ -227,7 +269,7 @@ const question_timer = (question_times, inputs, answers_from_user) => {
             answers_from_user.push("Timed out")
             console.log(answers_from_user);
             document.getElementById("a").click()
-        }   
+        }
         else {
             let minutes = Math.floor(now / 60000);
             let seconds = (now) / 1000 - Math.floor(minutes * 60);
@@ -237,17 +279,17 @@ const question_timer = (question_times, inputs, answers_from_user) => {
             }
             else if (seconds >= 10) {
                 document.getElementById("question_timer").innerHTML = `${minutes}min ${seconds}s `
-                
+
             }
             let a = ""
             for (let i = 0; i < seconds; i++) {
-             
 
-                    a += ` <span style="font-weight:20000"><b>|</b></span>`
-                
+
+                a += ` <span style="font-weight:20000"><b>|</b></span>`
+
             }
             document.getElementById("timer_stripes").classList.add("correct")
-            if(now == 5000) {
+            if (now == 5000) {
                 document.getElementById("timer_stripes").classList.add("wrong")
             }
             document.getElementById("timer_stripes").innerHTML = `${a}`
@@ -369,16 +411,16 @@ const start_game = () => {
             timer()
             add_question(questionNbr, questions, inputs, question_times)
             question_timer(question_times, inputs, answers_from_user)
-// console.log(document.getElementById("question_timer").innerText);
+            // console.log(document.getElementById("question_timer").innerText);
 
             const first_answers = []
             inputs.forEach(element => {
                 element.addEventListener("click", () => {
-                        element.disabled = true;
-                        setTimeout(() => {
-                            element.disabled = false;
-                            
-                        }, 800);
+                    element.disabled = true;
+                    setTimeout(() => {
+                        element.disabled = false;
+
+                    }, 800);
                     if (!answers_from_user.includes(element.value)) {
                         const first_answer = {};
                         first_answer.answer = element.value
@@ -388,10 +430,10 @@ const start_game = () => {
                         if (element.value == questions[questionNbr].correctAnswer) {
                             inputs.forEach((el) => {
                                 if (!el.classList.contains("wrong") && el == element) {
-                                    if(document.getElementById("question_timer").innerText.slice(5, 7) == 0) {
+                                    if (document.getElementById("question_timer").innerText.slice(5, 7) == 0) {
 
                                         question_times.push(`0:${document.getElementById("question_timer").innerText.slice(5, 7)}s`)
-                                    } else{
+                                    } else {
 
                                         question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(5, 7)}s`)
                                     }
@@ -406,13 +448,13 @@ const start_game = () => {
                         else {
                             console.log("wrong");
                             answers_from_user.push(element.value)
-                            if(document.getElementById("question_timer").innerText.slice(5, 7) == 0) {
+                            if (document.getElementById("question_timer").innerText.slice(5, 7) == 0) {
 
                                 question_times.push(`0:${document.getElementById("question_timer").innerText.slice(5, 7)}s`)
-                            } else{
+                            } else {
 
                                 question_times.push(`0:${20 - document.getElementById("question_timer").innerText.slice(5, 7)}s`)
-                            }                            play_wrong()
+                            } play_wrong()
                             element.classList.add("wrong")
                             // document.getElementById("c_w").innerHTML = `This is wrong answer`
                         }
@@ -420,7 +462,7 @@ const start_game = () => {
 
                     if (questionNbr + 1 == data.length) {
                         setTimeout(() => {
-                            
+
                             document.getElementById("card").classList.add("score_listed")
                             // Time: ${document.getElementById("timer").innerHTML}
                             document.getElementById("card").innerHTML = `<span>Hello  <strong><u>${username}</u></strong> your score is ${counter}/${data.length} (${Math.floor(counter * 100 / data.length)}%) </span>
