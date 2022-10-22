@@ -1,3 +1,13 @@
+const slider = document.querySelector('input[type="range"]');
+
+const rangeValue = function(){
+  let newValue = slider.value;
+  let value = document.querySelector('.value');
+  value.innerHTML = newValue;
+}
+
+slider.addEventListener("input", rangeValue);
+
 const selectAllCategoriesAutomaticly = (j) =>{
     let class_name = `all${j}`;
     const cat_all = [];
@@ -9,7 +19,6 @@ const selectAllCategoriesAutomaticly = (j) =>{
     }
 }
 
-console.log( document.getElementsByClassName(`all${j}`)[0].checked);
     document.getElementsByClassName(`${class_name}`)[0].addEventListener("change", () => {
         
         if ((document.getElementsByClassName(`${class_name}`)[0].checked) ) {
