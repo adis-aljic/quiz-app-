@@ -11,13 +11,23 @@
 
 <body>
     <audio id="wrong" src="./wrong.mp3"></audio>
-    <audio id="correct" src="./correct.mp3"></audio>
+    <audio id="correct" src="./correct.mp3" ></audio>
+    
     <div class="main">
         <div id="results">
             <div class="mute">
-                <button id="muted" class="mtd_btn"><img class="icon_sound" src="./sound.png" alt="" srcset=""></button>
-                <button id="unmuted" class="hidden mtd_btn"><img class="icon_sound" src="./mute.png" alt=""
+                <div>
+
+                    <button id="muted" class="mtd_btn"><img class="icon_sound" src="./sound.png" alt="" srcset=""></button>
+                    <button id="unmuted" class="hidden mtd_btn"><img class="icon_sound" src="./mute.png" alt=""
                         srcset=""></button>
+                    </div>
+                        <br>
+                        <br>
+                        <div>
+                            <span class="value_audio">  0</span>
+                            <input id="volume" type="range"  min="0" max="100" step="10" value="0"> </input>
+                        </div>
             </div>
             <br>
             <div>
@@ -241,7 +251,7 @@
                  
                    
 
-
+            
                 </div>
                 <div class="card hidden" id="card">
                     <br>
